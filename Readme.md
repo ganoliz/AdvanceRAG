@@ -26,10 +26,10 @@ prompt = """ \n
 ![image](https://github.com/ganoliz/AdvanceRAG/blob/main/images/AdaptvieRAG_architecture.png)
 ![image](https://github.com/ganoliz/AdvanceRAG/blob/main/images/AdaptiveRAG_workflow.png)
 
-Adaptive RAG use a strategy that whether use self-corrective RAG to retrieve document or use web search tool (Route data source first). You can also have more data source. Then we do same things like Self-RAG: Retrieve and grade documents are relevant or not. When generate, we grade generated answer is hallucination or not by another llm. If content is hallucination, we need to re-generate again. At final, we need to check the answer is actually answer user questions or not, if not we need re-write question and retrieve again.
+Adaptive RAG use a strategy that whether use self-corrective RAG to retrieve document or use web search tool (Route data source first). You can also have more data source. Then we do same things like Self-RAG: Retrieve and grade documents are relevant or not. When generate, we grade generated answer is hallucination or not by another llm. If content is hallucination, we need to re-generate again. At final, we need to check the answer is actually answer user questions or not, if not we need re-write question and retrieve again. [paper](https://arxiv.org/abs/2403.14403)
 
 
-Route prompt example
+Route prompt example:
 ```python
 system = """You are an expert at routing a user question to a vectorstore or web search.
 The vectorstore contains documents related to agents, prompt engineering, and adversarial attacks.
@@ -62,14 +62,13 @@ system = """You a question re-writer that converts an input question to a better
      for vectorstore retrieval. Look at the input and try to reason about the underlying semantic intent / meaning."""
 ```
 
- [paper](https://arxiv.org/abs/2403.14403)
+ 
 
 ## CRAG (Corrective RAG)
 ![image](https://github.com/ganoliz/AdvanceRAG/blob/main/images/CorrectiveRAG_architecture.png)
 ![image](https://github.com/ganoliz/AdvanceRAG/blob/main/images/CorrectiveRAG_workflow.png)
 
-Uses an LLM to grade the quality of the retrieved information from the given source. If the quality is low, it will try to retrieve the information from another source. In this example if retrieved contents is not relevant (we skip knowledge refinement step in this example), we rewrite user query and then do web search and generate answer from sources.
-[paper](https://arxiv.org/pdf/2401.15884.pdf)
+Uses an LLM to grade the quality of the retrieved information from the given source. If the quality is low, it will try to retrieve the information from another source. In this example if retrieved contents is not relevant (we skip knowledge refinement step in this example), we rewrite user query and then do web search and generate answer from sources. [paper](https://arxiv.org/pdf/2401.15884.pdf)
 
 Re-write question to do web search prompt example:
 ```python
